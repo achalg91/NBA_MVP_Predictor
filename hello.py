@@ -1,6 +1,16 @@
+import csv
+import io
+
+import sys
+from collections import OrderedDict
+from imp import reload
+
+reload(sys)
+sys.setdefaultencoding('utf-8')
+
 import requests
 from flask import Flask, escape, request, jsonify
-from werkzeug.urls import url_encode
+
 
 from utils import cleanArrayAndConvertToFloat, getRandomJoke
 
@@ -18,17 +28,15 @@ def do_something():
     final_dataset_url = base_url + dataset_endpoint + big_auth
     final_prediction_url = base_url + prediction_endpoint + big_auth
 
-    file = request.files['file']
-    data = pd.read_csv(file)
-    print(data)
 
     file = request.files['input']
+
 
     input_data_file = "input_file_2.csv"
     normal_data_file = "normalization_data.csv"
     biometrics_normal_data_file = "biometrics_normalization_data.csv"
-    with open(file) as f:
-        content = f.readlines()
+
+    content = file.readlines()
 
     with open(normal_data_file) as f:
         normal_content = f.readlines()
@@ -104,7 +112,7 @@ def do_something():
 
     probability = response['probability']
 
-    response = {}
+    response = OrderedDict()
 
     res = "Can the player be ALL-STAR? -->  "+can+" |  What is the Probability? --->  " +  str(probability)
     response["Response_string"] = res
@@ -115,4 +123,4 @@ def do_something():
     return jsonify(response)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(port=8000,debug=True)

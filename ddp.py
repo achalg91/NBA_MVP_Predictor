@@ -1,7 +1,8 @@
 import requests
 from utils import cleanArrayAndConvertToFloat
 import pandas as pd
-df = pd.read_csv(request.files.get('file'))
+
+
 
 base_url = "https://bigml.io/andromeda/"
 big_auth = "?username=skurniawan&api_key=f6d118792a9143f8d8851c44c8931a26338d8951"
@@ -15,6 +16,9 @@ final_prediction_url = base_url + prediction_endpoint +  big_auth
 input_data_file = "input_file_2.csv"
 normal_data_file = "normalization_data.csv"
 biometrics_normal_data_file = "biometrics_normalization_data.csv"
+
+file = pd.read_csv(input_data_file)
+
 with open(input_data_file) as f:
     content = f.readlines()
 
