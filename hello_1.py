@@ -17,13 +17,14 @@ from utils import cleanArrayAndConvertToFloat, getRandomJoke
 app = Flask(__name__)
 app.config['JSON_SORT_KEYS'] = False
 
-@app.route("/frontcourt/allstar/v1", methods=['POST'])
+
+@app.route("/backcourt/allstar/v1", methods=['POST'])
 def do_something():
     base_url = "https://bigml.io/andromeda/"
     big_auth = "?username=skurniawan&api_key=f6d118792a9143f8d8851c44c8931a26338d8951"
     prediction_endpoint = "prediction"
     dataset_endpoint = "dataset/5dc4ec3cf80b1640d7003584"
-    model_endpoint = "logisticregression/5dc4ed04f80b1640d7003587"
+    model_endpoint = "logisticregression/5dc4bc5e5e269e31f6004544"
 
     final_dataset_url = base_url + dataset_endpoint + big_auth
     final_prediction_url = base_url + prediction_endpoint + big_auth
@@ -122,5 +123,6 @@ def do_something():
 
     return jsonify(response)
 
+
 if __name__ == "__main__":
-    app.run(port=8080,debug=True)
+    app.run(port=5000,debug=True)
