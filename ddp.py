@@ -1,15 +1,7 @@
 import requests
-from flask import Flask, request, escape
-
-app = Flask(__name__)
-
-@app.route('/')
-def hello():
-    name = request.args.get("name", "World")
-    return f'Hello, {escape(name)}!'
-
-# api-endpoint
 from utils import cleanArrayAndConvertToFloat
+import pandas as pd
+df = pd.read_csv(request.files.get('file'))
 
 base_url = "https://bigml.io/andromeda/"
 big_auth = "?username=skurniawan&api_key=f6d118792a9143f8d8851c44c8931a26338d8951"
